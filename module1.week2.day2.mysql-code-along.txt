@@ -1,0 +1,970 @@
+Tjerks-MBP:bin tjerk$ pwd
+/usr/local/mysql/bin
+Tjerks-MBP:bin tjerk$ ./mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 23
+Server version: 8.0.19 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| IronHackers        |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> DROP DATABASE IronHackers;
+Query OK, 2 rows affected (0.02 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+
+mysql> CREATE DATABASE IronHackers
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| IronHackers        |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> USE DATABASE IronHackers;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> USE IronHackers;
+Database changed
+mysql> CREATE TABLE `Student`;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> CREATE TABLE `Student` (`ID` INT(5) AUTO_INCREMENT, PRIMARY KEYmysql> CREATE TABLE `Student` (`ID` INT(5) AUTO_INCREMENT,
+    -> PRIMARY KEY (ID));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRIMARY KEY (ID))' at line 2
+mysql> CREATE TABLE `Student` (`ID` INT(5) AUTO_INCREMENT, PRIMARY KEY (ID));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> DESCRIBE Student;
++-------+------+------+-----+---------+----------------+
+| Field | Type | Null | Key | Default | Extra          |
++-------+------+------+-----+---------+----------------+
+| ID    | int  | NO   | PRI | NULL    | auto_increment |
++-------+------+------+-----+---------+----------------+
+1 row in set (0.01 sec)
+
+mysql> SHOW TABLES;
++-----------------------+
+| Tables_in_ironhackers |
++-----------------------+
+| Student               |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> DROP TABLE Student;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW TABLES;
+Empty set (0.00 sec)
+
+mysql> CREATE TABLE `Student` (
+    ->                                 `ID` INT(5) AUTO_INCREMENT,
+    ->                                 PRIMARY KEY (ID),
+    ->                                 `name` VARCHAR(60),
+    ->                                 `phone` VARCHAR(14)
+    ->                         );
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SHOW TABLES;
++-----------------------+
+| Tables_in_ironhackers |
++-----------------------+
+| Student               |
++-----------------------+
+1 row in set (0.01 sec)
+
+mysql> DESCRIBE Student;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(60) | YES  |     | NULL    |                |
+| phone | varchar(14) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> DESC Student;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(60) | YES  |     | NULL    |                |
+| phone | varchar(14) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Lorenzo');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO `Student` (name) VALUES ('Lorenzo');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Student (`name`) VALUES ('Lorenzo');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Student (`name`) VALUES (Lorenzo);
+ERROR 1054 (42S22): Unknown column 'Lorenzo' in 'field list'
+mysql> INSERT INTO `Student` (`name`) VALUES ('Lorenzo');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Student;
++----+---------+-------+
+| ID | name    | phone |
++----+---------+-------+
+|  1 | Lorenzo | NULL  |
+|  2 | Lorenzo | NULL  |
+|  3 | Lorenzo | NULL  |
+|  4 | Lorenzo | NULL  |
++----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> DELETE FROM Student;
+Query OK, 4 rows affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Lorenzo');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> DELETE FROM Student;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Anna Riera');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Kevin Forster');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Lorenzo Fabritius'); 
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Miguel Granica');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Minerva Liste');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Octavi Fernandez');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Oriol Cunill');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Rebecca Estiarte');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Robin Langlois');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Yago Mougán');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Yazan Masarweh');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Student` (`name`) VALUES ('Zak Abou Merieme');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> DESCRIBE Student;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(60) | YES  |     | NULL    |                |
+| phone | varchar(14) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SHOW TABLE Student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Student' at line 1
+mysql> SELECT * FROM Student;
++----+-------------------+-------+
+| ID | name              | phone |
++----+-------------------+-------+
+|  6 | Anna Riera        | NULL  |
+|  7 | Kevin Forster     | NULL  |
+|  8 | Lorenzo Fabritius | NULL  |
+|  9 | Miguel Granica    | NULL  |
+| 10 | Minerva Liste     | NULL  |
+| 11 | Octavi Fernandez  | NULL  |
+| 12 | Oriol Cunill      | NULL  |
+| 13 | Rebecca Estiarte  | NULL  |
+| 14 | Robin Langlois    | NULL  |
+| 15 | Yago Mougán       | NULL  |
+| 16 | Yazan Masarweh    | NULL  |
+| 17 | Zak Abou Merieme  | NULL  |
++----+-------------------+-------+
+12 rows in set (0.00 sec)
+
+mysql> UPDATE Student SET phone = '619123456';
+Query OK, 12 rows affected (0.01 sec)
+Rows matched: 12  Changed: 12  Warnings: 0
+
+mysql> SELECT * FROM Student;
++----+-------------------+-----------+
+| ID | name              | phone     |
++----+-------------------+-----------+
+|  6 | Anna Riera        | 619123456 |
+|  7 | Kevin Forster     | 619123456 |
+|  8 | Lorenzo Fabritius | 619123456 |
+|  9 | Miguel Granica    | 619123456 |
+| 10 | Minerva Liste     | 619123456 |
+| 11 | Octavi Fernandez  | 619123456 |
+| 12 | Oriol Cunill      | 619123456 |
+| 13 | Rebecca Estiarte  | 619123456 |
+| 14 | Robin Langlois    | 619123456 |
+| 15 | Yago Mougán       | 619123456 |
+| 16 | Yazan Masarweh    | 619123456 |
+| 17 | Zak Abou Merieme  | 619123456 |
++----+-------------------+-----------+
+12 rows in set (0.00 sec)
+
+mysql> UPDATE Student SET phone = '';
+Query OK, 12 rows affected (0.01 sec)
+Rows matched: 12  Changed: 12  Warnings: 0
+
+mysql> SELECT * FROM Student;
++----+-------------------+-------+
+| ID | name              | phone |
++----+-------------------+-------+
+|  6 | Anna Riera        |       |
+|  7 | Kevin Forster     |       |
+|  8 | Lorenzo Fabritius |       |
+|  9 | Miguel Granica    |       |
+| 10 | Minerva Liste     |       |
+| 11 | Octavi Fernandez  |       |
+| 12 | Oriol Cunill      |       |
+| 13 | Rebecca Estiarte  |       |
+| 14 | Robin Langlois    |       |
+| 15 | Yago Mougán       |       |
+| 16 | Yazan Masarweh    |       |
+| 17 | Zak Abou Merieme  |       |
++----+-------------------+-------+
+12 rows in set (0.00 sec)
+
+mysql> UPDATE Student SET phone = '619123456' WHERE ID = 17;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM Student WHERE ID>14;
++----+------------------+-----------+
+| ID | name             | phone     |
++----+------------------+-----------+
+| 15 | Yago Mougán      |           |
+| 16 | Yazan Masarweh   |           |
+| 17 | Zak Abou Merieme | 619123456 |
++----+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE Student SET phone = '61988888',name = 'Zak Abou Merieme-Beyonce' WHERE ID = 17;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM Student WHERE ID>14;                          +----+--------------------------+----------+
+| ID | name                     | phone    |
++----+--------------------------+----------+
+| 15 | Yago Mougán              |          |
+| 16 | Yazan Masarweh           |          |
+| 17 | Zak Abou Merieme-Beyonce | 61988888 |
++----+--------------------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `Hobby` (
+    ->                                 `ID` INT(5) AUTO_INCREMENT,
+    ->                                 PRIMARY KEY (ID),
+    ->                                 `hobby` VARCHAR(35),
+    ->                                 `ball` BOOLEAN,
+    ->                                 `team` BOOLEAN
+    ->                         );
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SELECT * FROM Hobby;
+Empty set (0.01 sec)
+
+mysql> DESCRIBE Hobby;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| hobby | varchar(35) | YES  |     | NULL    |                |
+| ball  | tinyint(1)  | YES  |     | NULL    |                |
+| team  | tinyint(1)  | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> DESC Hobby;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| hobby | varchar(35) | YES  |     | NULL    |                |
+| ball  | tinyint(1)  | YES  |     | NULL    |                |
+| team  | tinyint(1)  | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO `Hobby` ('hobby') VALUES ('Hockey');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''hobby') VALUES ('Hockey')' at line 1
+mysql> INSERT INTO `Hobby` (`hobby`) VALUES ('Hockey');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO `Hobby` (`hobby`, `ball`) VALUES ('Hockey', TRUEmysql> INSEINSERT INTO `Hobby` (`hobby`) VALUES ('Hockey');C`
+Query OK, 1 row affected (0.01 sec)
+
+    `> ;
+    `> C
+    `> 
+    `> 
+    `> ;
+    `> ;
+    `> ;
+    `> C
+    `> 
+    `> 
+    `> A
+    `> 
+    `> AOUE
+    `> AOU
+    `> K;KQJ
+    `> 
+    `> 
+    `> SELECT * FROM STUDENT;
+    `> 
+    `> 
+    `> ;
+    `> Ç^C
+mysql> INSERT INTO `Hobby` (`hobby`, `ball`) VALUES ('Hockey',TRUE);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Hobby;
++----+--------+------+------+
+| ID | hobby  | ball | team |
++----+--------+------+------+
+|  1 | Hockey | NULL | NULL |
+|  2 | Hockey | NULL | NULL |
+|  3 | Hockey |    1 | NULL |
++----+--------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> DELETE FROM Hobby;
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> SELECT * FROM Hobby;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO `Hobby` (`hobby`, `ball`) VALUES ('Hockey',TRUE);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> DESCRIBE Hobby;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| hobby | varchar(35) | YES  |     | NULL    |                |
+| ball  | tinyint(1)  | YES  |     | NULL    |                |
+| team  | tinyint(1)  | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> INSERT INTO `Hobby` (`hobby`,`ball`,`team`) VALUES ('Reading', FALSE, FALSE);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Hobby;
++----+---------+------+------+
+| ID | hobby   | ball | team |
++----+---------+------+------+
+|  4 | Hockey  |    1 | NULL |
+|  5 | Reading |    0 |    0 |
++----+---------+------+------+
+2 rows in set (0.01 sec)
+
+mysql> INSERT INTO `Hobby` (`hobby`,`ball`,`team`) VALUES ('Reading2', FALSE, 0);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Hobby;                                            +----+----------+------+------+
+| ID | hobby    | ball | team |
++----+----------+------+------+
+|  4 | Hockey   |    1 | NULL |
+|  5 | Reading  |    0 |    0 |
+|  6 | Reading2 |    0 |    0 |
++----+----------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> DELETE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> DELETE FROM `Hobby` WHERE `ID` = 6;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Hobby;
++----+---------+------+------+
+| ID | hobby   | ball | team |
++----+---------+------+------+
+|  4 | Hockey  |    1 | NULL |
+|  5 | Reading |    0 |    0 |
++----+---------+------+------+
+2 rows in set (0.00 sec)
+
+mysql> ALTER TABLE `Hobby` ADD `outdoor` BOOLEAN;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Hobby;
++----+---------+------+------+---------+
+| ID | hobby   | ball | team | outdoor |
++----+---------+------+------+---------+
+|  4 | Hockey  |    1 | NULL |    NULL |
+|  5 | Reading |    0 |    0 |    NULL |
++----+---------+------+------+---------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE Hobby;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| ID      | int         | NO   | PRI | NULL    | auto_increment |
+| hobby   | varchar(35) | YES  |     | NULL    |                |
+| ball    | tinyint(1)  | YES  |     | NULL    |                |
+| team    | tinyint(1)  | YES  |     | NULL    |                |
+| outdoor | tinyint(1)  | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> DESCRIBE Student;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(60) | YES  |     | NULL    |                |
+| phone | varchar(14) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE `Hobby` ADD FOREIGN KEY `student_id` INT(5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INT(5)' at line 1
+mysql> ALTER TABLE `Hobby` ADD `student_id` INT(5);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> DESCRIBE Hobby;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| ID         | int         | NO   | PRI | NULL    | auto_increment |
+| hobby      | varchar(35) | YES  |     | NULL    |                |
+| ball       | tinyint(1)  | YES  |     | NULL    |                |
+| team       | tinyint(1)  | YES  |     | NULL    |                |
+| outdoor    | tinyint(1)  | YES  |     | NULL    |                |
+| student_id | int         | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> clear
+mysql> SELECT * FROM Student;
++----+--------------------------+----------+
+| ID | name                     | phone    |
++----+--------------------------+----------+
+|  6 | Anna Riera               |          |
+|  7 | Kevin Forster            |          |
+|  8 | Lorenzo Fabritius        |          |
+|  9 | Miguel Granica           |          |
+| 10 | Minerva Liste            |          |
+| 11 | Octavi Fernandez         |          |
+| 12 | Oriol Cunill             |          |
+| 13 | Rebecca Estiarte         |          |
+| 14 | Robin Langlois           |          |
+| 15 | Yago Mougán              |          |
+| 16 | Yazan Masarweh           |          |
+| 17 | Zak Abou Merieme-Beyonce | 61988888 |
++----+--------------------------+----------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Hobby;
++----+---------+------+------+---------+------------+
+| ID | hobby   | ball | team | outdoor | student_id |
++----+---------+------+------+---------+------------+
+|  4 | Hockey  |    1 | NULL |    NULL |       NULL |
+|  5 | Reading |    0 |    0 |    NULL |       NULL |
++----+---------+------+------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO `Hobby` ('name','ball','team','outdoor','student_id') VALUES ('Volleyball', TRUE, TRUE, FALSE, 13);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''name','ball','team','outdoor','student_id') VALUES ('Volleyball', TRUE, TRUE, F' at line 1
+mysql> INSERT INTO `Hobby` (`name`,`ball`,`team`,`outdoor`,`student_id`) VALUES ('Volleyball', TRUE, TRUE, FALSE, 13);
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> INSERT INTO `Hobby` (`hobby`,`ball`,`team`,`outdoor`,`student_id`) VALUES ('Volleyball', TRUE, TRUE, FALSE, 13);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Hobby;
++----+------------+------+------+---------+------------+
+| ID | hobby      | ball | team | outdoor | student_id |
++----+------------+------+------+---------+------------+
+|  4 | Hockey     |    1 | NULL |    NULL |       NULL |
+|  5 | Reading    |    0 |    0 |    NULL |       NULL |
+|  7 | Volleyball |    1 |    1 |       0 |         13 |
++----+------------+------+------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO `Hobby` (`hobby`,`ball`,`team`,`outdoor`,`student_id`) VALUES ('Volleyball', TRUE, TRUE, FALSE, 88);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Hobby;                                        +----+------------+------+------+---------+------------+
+| ID | hobby      | ball | team | outdoor | student_id |
++----+------------+------+------+---------+------------+
+|  4 | Hockey     |    1 | NULL |    NULL |       NULL |
+|  5 | Reading    |    0 |    0 |    NULL |       NULL |
+|  7 | Volleyball |    1 |    1 |       0 |         13 |
+|  8 | Volleyball |    1 |    1 |       0 |         88 |
++----+------------+------+------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Hobby DROP student_id;
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Hobby;
++----+------------+------+------+---------+
+| ID | hobby      | ball | team | outdoor |
++----+------------+------+------+---------+
+|  4 | Hockey     |    1 | NULL |    NULL |
+|  5 | Reading    |    0 |    0 |    NULL |
+|  7 | Volleyball |    1 |    1 |       0 |
+|  8 | Volleyball |    1 |    1 |       0 |
++----+------------+------+------+---------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE `Hobby` ADD FOREIGN KEY (`student_id`) REFERENCES Student(ID);
+ERROR 1072 (42000): Key column 'student_id' doesn't exist in table
+mysql> ALTER TABLE `Hobby` ADD `student_id` INT(5);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> ALTER TABLE `Hobby` ADD FOREIGN KEY (`student_id`) REFERENCES Student(ID);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Hobby` (`Fencing Historical european martial arts`,`ball`,`team`,`outdoor`,`student_id`) VALUES (ç^CE, TRUE, FALSEmysql> ^C
+mysql> SELECT ID FROM Student WHERE name LIKE 'iago';
+Empty set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name LIKE 'ago';
+Empty set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name LIKE 'Zak';
+Empty set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name^C
+mysql> SELECT * FROM Student;
++----+--------------------------+----------+
+| ID | name                     | phone    |
++----+--------------------------+----------+
+|  6 | Anna Riera               |          |
+|  7 | Kevin Forster            |          |
+|  8 | Lorenzo Fabritius        |          |
+|  9 | Miguel Granica           |          |
+| 10 | Minerva Liste            |          |
+| 11 | Octavi Fernandez         |          |
+| 12 | Oriol Cunill             |          |
+| 13 | Rebecca Estiarte         |          |
+| 14 | Robin Langlois           |          |
+| 15 | Yago Mougán              |          |
+| 16 | Yazan Masarweh           |          |
+| 17 | Zak Abou Merieme-Beyonce | 61988888 |
++----+--------------------------+----------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name LIKE '%Zak%';
++----+
+| ID |
++----+
+| 17 |
++----+
+1 row in set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name LIKE '%iago%';
+Empty set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name LIKE '%ago%';
++----+
+| ID |
++----+
+| 15 |
++----+
+1 row in set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name = 'Anna Riera';
++----+
+| ID |
++----+
+|  6 |
++----+
+1 row in set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name LIKE '%ago%';
++----+
+| ID |
++----+
+| 15 |
++----+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO `Hobby` (   `hobby`,
+    ->                         `ball`,
+    ->                         `team`,
+    ->                         `outdoor`,
+    ->                         `student_id`)
+    ->         VALUES      (   'Fencing Historical european martial arts', 
+    ->                         FALSE,  
+    ->                         FALSE, 
+    ->                         FALSE, 
+    ->                         15);
+ERROR 1406 (22001): Data too long for column 'hobby' at row 1
+mysql> INSERT INTO `Hobby` (   `hobby`,
+    ->                         `ball`,
+    ->                         `team`,
+    ->                         `outdoor`,
+    ->                         `student_id`)
+    ->         VALUES      (   'Fencing Historical Arts', 
+    ->                         FALSE,  
+    ->                         FALSE, 
+    ->                         FALSE, 
+    ->                         15);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name LIKE '%ri%';
++----+
+| ID |
++----+
+|  6 |
+|  8 |
+| 12 |
+| 17 |
++----+
+4 rows in set (0.00 sec)
+
+mysql> SELECT ID FROM Student WHERE name LIKE '%ori%';
++----+
+| ID |
++----+
+| 12 |
++----+
+1 row in set (0.00 sec)
+
+mysql> SELECT ID,name FROM Student WHERE name LIKE '%ri%';
++----+--------------------------+
+| ID | name                     |
++----+--------------------------+
+|  6 | Anna Riera               |
+|  8 | Lorenzo Fabritius        |
+| 12 | Oriol Cunill             |
+| 17 | Zak Abou Merieme-Beyonce |
++----+--------------------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO `Hobby` (   `hobby`,
+    ->                         `ball`,
+    ->                         `team`,
+    ->                         `outdoor`,
+    ->                         `student_id`)
+    ->         VALUES      (   'wavesurfing',
+    ->                         FALSE,
+    ->                         FALSE,
+    ->                         TRUE,
+    ->                         12);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT ID,name FROM Student WHERE name LIKE '%enzo%';
++----+-------------------+
+| ID | name              |
++----+-------------------+
+|  8 | Lorenzo Fabritius |
++----+-------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO `Hobby` (   `hobby`,
+    ->                         `ball`,
+    ->                         `team`,
+    ->                         `outdoor`,
+    ->                         `student_id`)
+    ->         VALUES      (   'wavesurfing',
+    ->                         FALSE,
+    ->                         FALSE,
+    ->                         TRUE,
+    ->                         8);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Hobby;
++----+-------------------------+------+------+---------+------------+
+| ID | hobby                   | ball | team | outdoor | student_id |
++----+-------------------------+------+------+---------+------------+
+|  4 | Hockey                  |    1 | NULL |    NULL |       NULL |
+|  5 | Reading                 |    0 |    0 |    NULL |       NULL |
+|  7 | Volleyball              |    1 |    1 |       0 |       NULL |
+|  8 | Volleyball              |    1 |    1 |       0 |       NULL |
+|  9 | Fencing Historical Arts |    0 |    0 |       0 |         15 |
+| 10 | wavesurfing             |    0 |    0 |       1 |         12 |
+| 11 | wavesurfing             |    0 |    0 |       1 |          8 |
++----+-------------------------+------+------+---------+------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT outdoor FROM `Hobby` WHERE outdoor = TRUE;
++---------+
+| outdoor |
++---------+
+|       1 |
+|       1 |
++---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM `Hobby` WHERE outdoor = TRUE;
++----+-------------+------+------+---------+------------+
+| ID | hobby       | ball | team | outdoor | student_id |
++----+-------------+------+------+---------+------------+
+| 10 | wavesurfing |    0 |    0 |       1 |         12 |
+| 11 | wavesurfing |    0 |    0 |       1 |          8 |
++----+-------------+------+------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT ID, Hobby FROM `Hobby` 
+    -> ;
++----+-------------------------+
+| ID | Hobby                   |
++----+-------------------------+
+|  4 | Hockey                  |
+|  5 | Reading                 |
+|  7 | Volleyball              |
+|  8 | Volleyball              |
+|  9 | Fencing Historical Arts |
+| 10 | wavesurfing             |
+| 11 | wavesurfing             |
++----+-------------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM `Hobby` WHERE outdoor = TRUE;
++----+-------------+------+------+---------+------------+
+| ID | hobby       | ball | team | outdoor | student_id |
++----+-------------+------+------+---------+------------+
+| 10 | wavesurfing |    0 |    0 |       1 |         12 |
+| 11 | wavesurfing |    0 |    0 |       1 |          8 |
++----+-------------+------+------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Student JOIN Hobby ON Student.ID = Hobby.Student_ID WHERE Hobby.hobby = 'wavesurfing';
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+| ID | name              | phone | ID | hobby       | ball | team | outdoor | student_id |
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+| 12 | Oriol Cunill      |       | 10 | wavesurfing |    0 |    0 |       1 |         12 |
+|  8 | Lorenzo Fabritius |       | 11 | wavesurfing |    0 |    0 |       1 |          8 |
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> mysql> SELECT * FROM Student JOIN Hobby ON Student.ID = Hobby.student_ID WHERE Hobby.hobby = 'wavesurfing
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+| ID | name              | phone | ID | hobby       | ball | team | outdoor | student_id |
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+| 12 | Oriol Cunill      |       | 10 | wavesurfing |    0 |    0 |       1 |         12 |
+|  8 | Lorenzo Fabritius |       | 11 | wavesurfing |    0 |    0 |       1 |          8 |
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Student JOIN Hobby ON Student.ID = Hobby.student_ID WHERE Hobby.outdoor = TRUE;
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+| ID | name              | phone | ID | hobby       | ball | team | outdoor | student_id |
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+| 12 | Oriol Cunill      |       | 10 | wavesurfing |    0 |    0 |       1 |         12 |
+|  8 | Lorenzo Fabritius |       | 11 | wavesurfing |    0 |    0 |       1 |          8 |
++----+-------------------+-------+----+-------------+------+------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Student JOIN Hobby ON Student.ID = Hobby.student_ID WHERE Hobby.ball = TRUE;
+Empty set (0.00 sec)
+
+mysql> select * from hobby;
++----+-------------------------+------+------+---------+------------+
+| ID | hobby                   | ball | team | outdoor | student_id |
++----+-------------------------+------+------+---------+------------+
+|  4 | Hockey                  |    1 | NULL |    NULL |       NULL |
+|  5 | Reading                 |    0 |    0 |    NULL |       NULL |
+|  7 | Volleyball              |    1 |    1 |       0 |       NULL |
+|  8 | Volleyball              |    1 |    1 |       0 |       NULL |
+|  9 | Fencing Historical Arts |    0 |    0 |       0 |         15 |
+| 10 | wavesurfing             |    0 |    0 |       1 |         12 |
+| 11 | wavesurfing             |    0 |    0 |       1 |          8 |
++----+-------------------------+------+------+---------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from Student;
++----+--------------------------+----------+
+| ID | name                     | phone    |
++----+--------------------------+----------+
+|  6 | Anna Riera               |          |
+|  7 | Kevin Forster            |          |
+|  8 | Lorenzo Fabritius        |          |
+|  9 | Miguel Granica           |          |
+| 10 | Minerva Liste            |          |
+| 11 | Octavi Fernandez         |          |
+| 12 | Oriol Cunill             |          |
+| 13 | Rebecca Estiarte         |          |
+| 14 | Robin Langlois           |          |
+| 15 | Yago Mougán              |          |
+| 16 | Yazan Masarweh           |          |
+| 17 | Zak Abou Merieme-Beyonce | 61988888 |
++----+--------------------------+----------+
+12 rows in set (0.00 sec)
+
+mysql> UPDATE Hobby SET `student_id` = 11 WHERE `ID` = 5`
+    `> ;
+    `> ^C
+mysql> UPDATE Hobby SET `student_id` = 11 WHERE `ID` = 5`;
+    `> ^C
+mysql> UPDATE Hobby SET `student_id` = 11 WHERE `ID` = 5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from hobby;
++----+-------------------------+------+------+---------+------------+
+| ID | hobby                   | ball | team | outdoor | student_id |
++----+-------------------------+------+------+---------+------------+
+|  4 | Hockey                  |    1 | NULL |    NULL |       NULL |
+|  5 | Reading                 |    0 |    0 |    NULL |         11 |
+|  7 | Volleyball              |    1 |    1 |       0 |       NULL |
+|  8 | Volleyball              |    1 |    1 |       0 |       NULL |
+|  9 | Fencing Historical Arts |    0 |    0 |       0 |         15 |
+| 10 | wavesurfing             |    0 |    0 |       1 |         12 |
+| 11 | wavesurfing             |    0 |    0 |       1 |          8 |
++----+-------------------------+------+------+---------+------------+
+7 rows in set (0.00 sec)
+
+mysql> UPDATE Hobby SET `student_id` = 13 WHERE `ID` = 7;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from hobby;
++----+-------------------------+------+------+---------+------------+
+| ID | hobby                   | ball | team | outdoor | student_id |
++----+-------------------------+------+------+---------+------------+
+|  4 | Hockey                  |    1 | NULL |    NULL |       NULL |
+|  5 | Reading                 |    0 |    0 |    NULL |         11 |
+|  7 | Volleyball              |    1 |    1 |       0 |         13 |
+|  8 | Volleyball              |    1 |    1 |       0 |       NULL |
+|  9 | Fencing Historical Arts |    0 |    0 |       0 |         15 |
+| 10 | wavesurfing             |    0 |    0 |       1 |         12 |
+| 11 | wavesurfing             |    0 |    0 |       1 |          8 |
++----+-------------------------+------+------+---------+------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT hobby FROM Hobby WHERE team = TRUE;
++------------+
+| hobby      |
++------------+
+| Volleyball |
+| Volleyball |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT name FROM Student JOIN Hobby ON Student.ID = Hobby.student_ID WHERE team=TRUE;
++------------------+
+| name             |
++------------------+
+| Rebecca Estiarte |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> mysql> SELECT Student.name FROM Student JOIN Hobby ON Student.ID = Hobby.student_ID WHERE team=TRUE;
++------------------+
+| name             |
++------------------+
+| Rebecca Estiarte |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Student.name FROM Student JOIN Hobby ON Student.ID = Hobby.student_ID WHERE Hobby.team=TRUE;
++------------------+
+| name             |
++------------------+
+| Rebecca Estiarte |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Student.name FROM Student JOIN Hobby ON Student.ID = Hobby.student_ID WHERE Hobby.outdoor=TRUE;
++-------------------+
+| name              |
++-------------------+
+| Oriol Cunill      |
+| Lorenzo Fabritius |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE Hobby;
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Hobby | CREATE TABLE `Hobby` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `hobby` varchar(35) DEFAULT NULL,
+  `ball` tinyint(1) DEFAULT NULL,
+  `team` tinyint(1) DEFAULT NULL,
+  `outdoor` tinyint(1) DEFAULT NULL,
+  `student_id` int DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `hobby_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `Student` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE Student;
++---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table   | Create Table                                                                                                                                                                                                                                  |
++---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Student | CREATE TABLE `Student` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) DEFAULT NULL,
+  `phone` varchar(14) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+
